@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArtworkController;
 
 /*
@@ -20,6 +21,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// admin
+
+Route::middleware(['auth', 'isAdmin'])->group(function() {
+    Route::resource('/artwork', ArtworkController::class);
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/catalogue', [App\Http\Controllers\ArtworkController::class, 'catalogue'])->name('catalogue');
-Route::resource('/artwork', ArtworkController::class);
