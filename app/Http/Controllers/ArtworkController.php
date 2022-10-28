@@ -50,4 +50,10 @@ class ArtworkController extends Controller
         Artwork::destroy($id);
         return redirect('artwork')->with('flash_message', 'Artwork deleted!');
     }
+
+    public function catalogue()
+    {
+        $artworks = Artwork::all();
+        return view ('artworks.catalogue')->with('artworks', $artworks);
+    }
 }
