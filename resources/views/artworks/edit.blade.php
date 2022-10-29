@@ -1,11 +1,11 @@
 @extends('artworks.layout')
 @section('content')
     <div class="card">
-        <div class="card-header">Contactus Page</div>
+        <div class="card-header">Edit Artworks Page</div>
         <div class="card-body">
 
             <form action="{{ url('artwork/' .$artworks->id) }}" method="post">
-                {!! csrf_field() !!}
+                @csrf
                 @method("PATCH")
                 <input type="hidden" name="id" id="id" value="{{$artworks->id}}"/>
                 <label>Name</label>
@@ -39,7 +39,7 @@
                 @enderror
                 <br>
                 <label>Year</label>
-                <input type="text" name="year" id="year" value="{{$artworks->year}}"
+                <input type="number" name="year" id="year" value="{{$artworks->year}}"
                        class="form-control @error('year') is-invalid @enderror"
                        required autocomplete="year" autofocus>
                 @error('year')
@@ -49,7 +49,7 @@
                 @enderror
                 <br>
                 <label>Price</label>
-                <input type="text" name="price" id="price" value="{{$artworks->price}}"
+                <input type="number" name="price" id="price" value="{{$artworks->price}}"
                        class="form-control @error('price') is-invalid @enderror"
                        required autocomplete="price" autofocus>
                 @error('price')

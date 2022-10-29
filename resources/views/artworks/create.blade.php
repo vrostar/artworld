@@ -5,7 +5,7 @@
         <div class="card-body">
 
             <form action="{{ url('artwork') }}" method="post">
-                {!! csrf_field() !!}
+                @csrf
 
                 <label>Name</label></br>
                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
@@ -26,7 +26,7 @@
                 @enderror
                 <br>
                 <label>Description</label></br>
-                <textarea name='description' id='description'
+                <textarea type="text" name='description' id='description'
                           class="form-control @error('description') is-invalid @enderror"
                           required autocomplete="description" autofocus></textarea>
                 @error('description')
