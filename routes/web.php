@@ -37,6 +37,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function() {
 
     // admin artworks
     Route::resource('/artwork', ArtworkController::class);
+    Route::post('/artwork/{artwork}/active', [ArtworkController::class, 'toggleActive'])->name('artworks.toggle');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

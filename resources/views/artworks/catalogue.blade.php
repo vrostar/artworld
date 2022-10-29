@@ -1,4 +1,4 @@
-@extends('artworks.layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
@@ -6,14 +6,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>ARTWORKS</h2>
-                        <div class="input-group-lg col col-auto">
+                        <div class="d-flex justify-content input-group-lg col col-auto mb-2">
                             <form action="{{route('search')}}" method="POST">
                                 @csrf
-                                <label for="search"></label><input type="text" class="form-control" name="search" id="search"
+                                <label for="search"></label><input type="text" class="form-control-sm" name="search" id="search"
                                                                    placeholder="Search...">
-                                <button type="submit" class="btn btn-success">Go
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <button type="submit" class="btn btn-success mb-1">Go<i class="fa fa-search"></i></button>
                             </form>
                             <br>
                         </div>

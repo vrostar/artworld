@@ -1,4 +1,4 @@
-@extends('artworks.layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
@@ -9,11 +9,9 @@
                         <div class="input-group-lg col col-auto">
                             <form action="{{route('search')}}" method="POST">
                                 @csrf
-                                <label for="search"></label><input type="text" class="form-control" name="search" id="search"
+                                <label for="search"></label><input type="text" class="form-control-sm" name="search" id="search"
                                                                    placeholder="Search...">
-                                <button type="submit" class="btn btn-success">Go
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <button type="submit" class="btn btn-success mb-1">Go<i class="fa fa-search"></i></button>
                             </form>
                             <br>
                         </div>
@@ -65,6 +63,21 @@
                                                         onclick="return confirm(&quot;Confirm delete?&quot;)"><i
                                                         class="fa fa-trash-o" aria-hidden="true"></i> Delete
                                                 </button>
+                                            </form>
+                                            <form action="{{ route('artworks.toggle', $item->id) }}"
+                                                  method="POST">
+                                                @csrf
+                                                @if ($item->active == 1)
+                                                    {{--Show slashed out eye icon if the product is hidden--}}
+                                                    <button type="submit" class="btn btn-secondary">
+                                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                                    </button>
+                                                @else
+                                                    {{--Show eye icon if the product is visible--}}
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

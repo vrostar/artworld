@@ -70,4 +70,14 @@ class ArtworkController extends Controller
         // Return the search view with the results compacted
         return view('search', compact('artworks'));
     }
+
+    public function toggleActive($id)
+    {
+        $artworks = Artwork::find($id);
+        $artworks->active= !$artworks->active;
+        $artworks->save();
+        session()->flash('alert', 'Toggled Artwork!');
+
+        return redirect(route('artwork.index'));
+    }
 }

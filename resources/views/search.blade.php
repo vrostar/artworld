@@ -1,4 +1,4 @@
-@extends('artworks.layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
@@ -9,11 +9,9 @@
                         <div class="input-group-lg col col-auto">
                             <form action="{{route('search')}}" method="POST">
                                 @csrf
-                                <label for="search"></label><input type="text" class="form-control" name="search" id="search"
+                                <label for="search"></label><input type="text" class="form-control-sm" name="search" id="search"
                                                                    placeholder="Search...">
-                                <button type="submit" class="btn btn-success">SEARCH
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <button type="submit" class="btn btn-success mb-1">Go<i class="fa fa-search"></i></button>
                             </form>
                             <br>
                         </div>
