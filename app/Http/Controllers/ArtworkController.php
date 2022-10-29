@@ -56,4 +56,18 @@ class ArtworkController extends Controller
         $artworks = Artwork::all();
         return view ('artworks.catalogue')->with('artworks', $artworks);
     }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $artworks = Artwork::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('artist', 'LIKE', "%{$search}%")
+            ->get();
+
+        // Return the search view with the results compacted
+        return view('search', compact('artworks'));
+    }
 }

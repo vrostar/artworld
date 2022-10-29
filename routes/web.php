@@ -29,3 +29,4 @@ Route::middleware(['auth', 'isAdmin'])->group(function() {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/catalogue', [App\Http\Controllers\ArtworkController::class, 'catalogue'])->name('catalogue');
+Route::post('/search', [ProductController::class, 'search'])->name('search');

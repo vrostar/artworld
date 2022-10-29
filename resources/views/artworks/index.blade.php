@@ -6,7 +6,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>ARTWORKS</h2>
-                        <a href="{{ url('home') }}">Home</a>
                     </div>
                     <div class="card-body">
                         <a href="{{ url('/artwork/create') }}" class="btn btn-success btn-sm" title="Add New Artwork">
