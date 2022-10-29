@@ -6,6 +6,17 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>ARTWORKS</h2>
+                        <div class="input-group-lg col col-auto">
+                            <form action="{{route('search')}}" method="POST">
+                                @csrf
+                                <label for="search"></label><input type="text" class="form-control" name="search" id="search"
+                                                                   placeholder="Search...">
+                                <button type="submit" class="btn btn-success">Go
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                            <br>
+                        </div>
                     </div>
                     <div class="card-body">
                         <a href="{{ url('/artwork/create') }}" class="btn btn-success btn-sm" title="Add New Artwork">

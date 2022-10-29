@@ -7,7 +7,7 @@
                     <div class="card-header">
                         <h2>ARTWORKS</h2>
                         <div class="input-group-lg col col-auto">
-                            <form action="" method="POST">
+                            <form action="{{route('search')}}" method="POST">
                                 @csrf
                                 <label for="search"></label><input type="text" class="form-control" name="search" id="search"
                                                                    placeholder="Search...">

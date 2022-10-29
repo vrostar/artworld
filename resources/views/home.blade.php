@@ -15,8 +15,10 @@
                     @endif
 
                     {{ __('Welcome to ARTWORLD, have a look at our wonderful art catalogue!') }}
-                        <a href="{{ url('/artwork') }}">ARTWORKS admin</a>
-                        <a href="{{ url('/catalogue') }}">ARTWORKS</a>
+                        <a href="{{ url('/artwork') }}">Art (admin)</a>
+                        <a href="{{ url('/catalogue') }}">Catalogue</a>
+                        <a href="{{ url('/users') }}">Users admin</a>
+                        <a href="{{ url('/users/profile') }}">Edit Profile</a>
                 </div>
             </div>
         </div>
