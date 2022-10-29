@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title', 'Edit Profile')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -65,7 +64,7 @@
                         <div>
                             Verification:
                             @if($user->verified_status == 1)
-                                <p>Yay, your account is verified!</p>
+                                <p>Your account is verified.</p>
                             @else
                                 <p>It looks like your account isn't verified yet.
                                     <a href="/home">How to verify my account?</a>
@@ -75,14 +74,12 @@
                     </div>
                 </div>
                 <br>
-                @can('delete', $user)
                     <div class="card">
                         <div class="card-header bg-warning">
                             <h1>Delete account</h1>
                         </div>
                         <div class="card-body">
-                            <h5>Are you sure you want to delete your account, {{$user->name}}? We will miss you..
-                                :(</h5>
+                            <h5>Do you want to delete your account? This can not be undone.</h5>
                             <br>
                             <form action="{{route('users.destroy', $user->id)}}" method="POST">
                                 @method('DELETE')
@@ -91,11 +88,10 @@
                                        name="id"
                                        type="hidden"
                                        value="{{$user->id}}">
-                                <input type="submit" value="Yes, I'm sure" class="btn btn-warning">
+                                <input type="submit" value="Yes" class="btn btn-warning">
                             </form>
                         </div>
                     </div>
-                @endcan
             </div>
         </div>
 @endsection

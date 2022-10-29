@@ -17,7 +17,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>E-mail</th>
-                        <th></th>
+                        <th>Admin?</th>
                         <th>Verified</th>
                     </tr>
                     </thead>
