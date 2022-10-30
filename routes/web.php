@@ -16,11 +16,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('home');
 });
-
-Auth::routes();
 
 // users
 Route::get('/users/profile', [UserController::class, 'edit'])->name('users.edit');
@@ -37,9 +37,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function() {
 
     // admin artworks
     Route::post('/artwork/{artwork}/active', [ArtworkController::class, 'toggleActive'])->name('artworks.toggle');
-    Route::resource('/artwork', ArtworkController::class);
 });
-
+Route::resource('/artwork', ArtworkController::class);
 
 
 // only verified users can create

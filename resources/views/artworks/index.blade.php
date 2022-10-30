@@ -49,11 +49,14 @@
                                                                                        aria-hidden="true"></i> View
                                                 </button>
                                             </a>
+                                            @if((Auth::user()->role == '1'))
                                             <a href="{{ url('/artwork/' . $item->id . '/edit') }}" title="Edit Artwork">
                                                 <button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"
                                                                                           aria-hidden="true"></i> Edit
                                                 </button>
                                             </a>
+                                            @endif
+                                            @if((Auth::user()->role == '1'))
                                             <form method="POST" action="{{ url('/artwork' . '/' . $item->id) }}"
                                                   accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
@@ -64,6 +67,8 @@
                                                         class="fa fa-trash-o" aria-hidden="true"></i> Delete
                                                 </button>
                                             </form>
+                                            @endif
+                                            @if((Auth::user()->role == '1'))
                                             <form action="{{ route('artworks.toggle', $item->id) }}"
                                                   method="POST">
                                                 @csrf
@@ -79,6 +84,7 @@
                                                     </button>
                                                 @endif
                                             </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
