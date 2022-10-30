@@ -36,6 +36,8 @@
                                 </thead>
                                 <tbody>
                                 @foreach($artworks as $item)
+{{--                                    hide item if its not active--}}
+                                    @if($item->active === 0)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
@@ -51,6 +53,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>

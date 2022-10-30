@@ -68,14 +68,14 @@
                                                   method="POST">
                                                 @csrf
                                                 @if ($item->active == 1)
-                                                    {{--Show slashed out eye icon if the product is hidden--}}
+                                                    {{--Show Inactive if the product is hidden--}}
                                                     <button type="submit" class="btn btn-secondary">
-                                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>Inactive
                                                     </button>
                                                 @else
-                                                    {{--Show eye icon if the product is visible--}}
+                                                    {{--Show Active if the product is visible--}}
                                                     <button type="submit" class="btn btn-success">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>Active
                                                     </button>
                                                 @endif
                                             </form>
