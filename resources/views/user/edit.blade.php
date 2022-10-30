@@ -9,7 +9,7 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header bg-primary">
+                    <div class="card-header bg-secondary">
                         <h1>Edit Profile</h1>
                     </div>
                     <div class="card-body">
@@ -24,7 +24,7 @@
                                    name="name"
                                    type="text"
                                    value="{{old("name", $user->name)}}"
-                                   class="input-group input-group-text @error("name") is-invalid @enderror">
+                                   class="input-group-text @error("name") is-invalid @enderror">
                             @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -34,7 +34,7 @@
                                    name="email"
                                    type="text"
                                    value="{{old("description", $user->email)}}"
-                                   class="input-group input-group-text @error("email") is-invalid @enderror">
+                                   class="input-group-text @error("email") is-invalid @enderror">
                             @error("description")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -44,7 +44,7 @@
                                    name="password"
                                    type="password"
                                    value=""
-                                   class="input-group input-group-text @error("password") is-invalid @enderror">
+                                   class="input-group-text @error("password") is-invalid @enderror">
                             @error("description")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -66,9 +66,7 @@
                             @if($user->verified_status == 1)
                                 <p>Your account is verified.</p>
                             @else
-                                <p>It looks like your account isn't verified yet.
-                                    <a href="/home">How to verify my account?</a>
-                                </p>
+                                <p>Your account has not been verified yet.</p>
                             @endif
                         </div>
                     </div>

@@ -26,12 +26,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <ul class="navbar-nav me-auto">
+                    <a class="navbar-brand" href="{{ url('/catalogue') }}">Catalogue
+                    </a>
+                </ul>
+                <ul class="navbar-nav me-auto">
+                    <a class="navbar-brand" href="{{ url('/artwork') }}">Admin
+                    </a>
+                </ul>
+                <ul class="navbar-nav me-auto">
+                    <a class="navbar-brand" href="{{ url('/users') }}">Users
+                    </a>
+                </ul>
+                <ul class="navbar-nav me-auto">
+                    <a class="navbar-brand" href="{{ url('/users/profile') }}">Edit Profile
+                    </a>
+                </ul>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <a class="navbar-brand" href="{{ url('/catalogue') }}">Catalogue
-                        </a>
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

@@ -36,10 +36,18 @@ Route::middleware(['auth', 'isAdmin'])->group(function() {
     Route::post('/users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
 
     // admin artworks
-    Route::resource('/artwork', ArtworkController::class);
     Route::post('/artwork/{artwork}/active', [ArtworkController::class, 'toggleActive'])->name('artworks.toggle');
+    Route::resource('/artwork', ArtworkController::class);
+});
+
+
+
+// only verified users can create
+Route::middleware(['auth', 'isVerified'])->group(function () {
+    Route::post('/artwork/create', [ArtworkController::class, 'create'])->name('artworks.create');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/artwork/{artwork}', [App\Http\Controllers\ArtworkController::class, 'show'])->name('artworks.show');
 Route::get('/catalogue', [App\Http\Controllers\ArtworkController::class, 'catalogue'])->name('catalogue');
 Route::post('/search', [App\Http\Controllers\ArtworkController::class, 'search'])->name('search');

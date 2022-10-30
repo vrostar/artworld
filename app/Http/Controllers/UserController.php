@@ -32,9 +32,9 @@ class UserController extends Controller
     {
         $user->verified_status = 1;
         $user->save();
-        session()->flash('alert', 'Your account is now verified, you can now add new products using the button below!');
+        session()->flash('alert', 'Your account is now verified');
 
-        return redirect(route('artworks.index'));
+        return redirect(route('artwork.index'));
     }
 
     public function update(Request $request)

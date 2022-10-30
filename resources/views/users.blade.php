@@ -44,11 +44,11 @@
                             </td>
                             <td>
                                 @if($user->verified_status == 1)
-                                    {{--If user is verified, show checkmark--}}
-                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{--If verified show V--}}
+                                    <i class="fa fa-check" aria-hidden="true"></i>V
                                 @else
-                                    {{--If user isn't verified, show cross--}}
-                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    {{--If not verified show N--}}
+                                    <i class="fa fa-times" aria-hidden="true"></i>N
                                 @endif
                             </td>
                         </tr>
