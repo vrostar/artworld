@@ -22,13 +22,13 @@ Route::get('/', function () {
     return view('home');
 });
 
-// users
+// User routes
 Route::get('/users/profile', [UserController::class, 'edit'])->name('users.edit');
 Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 Route::post('/users/{user}/verify', [UserController::class, 'verifyUser'])->name('users.verify-user');
 
-// admin
+// Admin routes
 
 Route::middleware(['auth', 'isAdmin'])->group(function() {
     // admin users
@@ -42,9 +42,12 @@ Route::resource('/artwork', ArtworkController::class);
 
 
 // only verified users can create
+
 Route::middleware(['auth', 'isVerified'])->group(function () {
     Route::post('/artwork/create', [ArtworkController::class, 'create'])->name('artworks.create');
 });
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/artwork/{artwork}', [App\Http\Controllers\ArtworkController::class, 'show'])->name('artworks.show');

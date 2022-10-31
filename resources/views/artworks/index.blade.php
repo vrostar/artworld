@@ -17,9 +17,11 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @if((Auth::user()->verified_status == '1'))
                         <a href="{{ url('/artwork/create') }}" class="btn btn-success btn-sm" title="Add New Artwork">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
+                        @endif
                         <br/>
                         <br/>
                         <div class="table-responsive">
