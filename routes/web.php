@@ -42,6 +42,9 @@ Route::resource('/artwork', ArtworkController::class);
 
 
 // only verified users can create
+// doesnt work cause of resource being public.
+// resource being private doesnt allow creation
+// dilemma
 
 Route::middleware(['auth', 'isVerified'])->group(function () {
     Route::post('/artwork/create', [ArtworkController::class, 'create'])->name('artworks.create');
