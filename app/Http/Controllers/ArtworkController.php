@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Artwork;
 
@@ -10,12 +11,14 @@ class ArtworkController extends Controller
     public function index()
     {
         $artworks = Artwork::all();
-        return view ('artworks.index')->with('artworks', $artworks);
+        $categories = Category::all();
+        return view('artworks.index', compact('artworks', 'categories'));
     }
 
     public function create()
     {
-        return view('artworks.create');
+        $categories = Category::all();
+        return view('artworks.create', compact('categories'));
     }
 
     public function store(Request $request)

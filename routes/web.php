@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function() {
     Route::post('/artwork/{artwork}/active', [ArtworkController::class, 'toggleActive'])->name('artworks.toggle');
 });
 Route::resource('/artwork', ArtworkController::class);
+Route::resource('/categories', CategoryController::class)->names('categories');
 
 
 // only verified users can create
