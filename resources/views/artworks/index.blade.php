@@ -14,6 +14,13 @@
                                 <button type="submit" class="btn btn-success mb-1">Go<i class="fa fa-search"></i></button>
                             </form>
                             <br>
+                            @foreach($categories as $category)
+                                <input class="btn-check" name="searchCategory[]" type="checkbox"
+                                       id="category-{{$category->id}}" value="{{$category->id}}">
+
+                                <label class="btn btn-outline-success"
+                                       for="category-{{$category->id}}">{{$category->name}}</label>
+                            @endforeach
                         </div>
                     </div>
                     <div class="card-body">

@@ -53,6 +53,20 @@
                 </span>
                 @enderror
                 <br>
+                <div>
+                    Categories:
+                    @foreach($categories as $category)
+                        <div class="form-check">
+                            <label class="form-check-label"
+                                   for="flexCheckDefault">{{$category->name}}</label>
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                                   name="category_id[]" value="{{$category->id}}">
+                        </div>
+                    @endforeach
+                    @error("category_id[]")
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
                 <input type="submit" value="Save" class="btn btn-success">
             </form>
         </div>

@@ -23,29 +23,64 @@ class ArtworkController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
-        Artwork::create($input);
-        return redirect('artwork')->with('flash_message', 'Artwork saved!');
+        //Merge request to data
+        $data = $request->all();
+        $request->merge($data);
+
+        //Validate request
+        $validated = $this->validate($request,
+            [
+                'name' => 'bail|required|max:255',
+                'artist' => 'bail|required|max:255',
+                'description' => 'nullable',
+                'year' => 'bail|required|numeric',
+                'price' => 'bail|required|numeric',
+                'category_id' => 'bail|required',
+                'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
+            ]);
+        //Add and redirect
+        $artwork = Artwork::create($validated);
+        $artwork->categories()->attach($validated['category_id']);
+        session()->flash('alert', 'Artwork successfully added.');
+        return redirect('/catalogue');
     }
 
     public function show($id)
     {
-        $artwork = Artwork::find($id);
-        return view('artworks.show')->with('artworks', $artwork);
+        $artworks = Artwork::find($id);
+        return view('artworks.show')->with('artworks', $artworks);
     }
 
     public function edit($id)
     {
-        $artwork = Artwork::find($id);
-        return view('artworks.edit')->with('artworks', $artwork);
+        $artworks = Artwork::find($id);
+        $categories = Category::all();
+        $selectedCategories = $artworks->categories;
+        return view('artworks.edit', compact('artworks', 'categories', 'selectedCategories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $artwork = Artwork::find($id);
-        $input = $request->all();
-        $artwork->update($input);
-        return redirect('artwork')->with('flash_message', 'Artwork updated!');
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:artworks',
+                'name' => 'bail|required|max:255',
+                'artist' => 'bail|required|max:255',
+                'description' => 'nullable',
+                'year' => 'bail|required|numeric',
+                'price' => 'bail|required|numeric',
+                'category_id' => 'bail|required',
+                'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
+            ]);
+        $artwork = Artwork::find($validated['id']);
+        $artwork->name = $validated['name'];
+        $artwork->artist = $validated['artist'];
+        $artwork->description = $validated['description'];
+        $artwork->year = $validated['year'];
+        $artwork->price = $validated['price'];
+        $artwork->save();
+        $artwork->categories()->sync($validated['category_id']);
+        return redirect(route('artworks.show', $artwork->id));
     }
 
     public function destroy($id)
@@ -57,21 +92,46 @@ class ArtworkController extends Controller
     public function catalogue()
     {
         $artworks = Artwork::all();
-        return view ('artworks.catalogue')->with('artworks', $artworks);
+        $categories = Category::all();
+        return view('artworks.catalogue', compact('artworks', 'categories'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
+        $categories = Category::all();
         // Get the search value from the request
         $search = $request->input('search');
+        $searchCategories = $request->input('searchCategory');
+        $artworks = null;
 
-        // Search in the title and body columns from the posts table
-        $artworks = Artwork::query()
-            ->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('artist', 'LIKE', "%{$search}%")
-            ->get();
+        // Search in the title and body columns from the artworks table
+        if (!$search == null) {
+            $artworks = Artwork::query()
+                ->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('artist', 'LIKE', "%{$search}%")
+                ->get();
+        }
+
+        if (!$searchCategories == null) {
+            $i = 0;
+            foreach ($searchCategories as $searchCategory)
+                if ($i === 0) {
+                    $i++;
+                    $artworks = Artwork::query()
+                        ->where('name', 'LIKE', "%{$search}%")
+                        ->whereRelation('categories', 'categories.id', 'LIKE', "%{$searchCategory}%")
+                        ->get();
+                } elseif ($i > 0) {
+                    $artworks = Artwork::query()
+                        ->where('name', 'LIKE', "%{$search}%")
+                        ->WhereRelation('categories', 'categories.id', 'LIKE', "%{$searchCategory}%")
+                        ->get();
+                }
+
+        }
 
         // Return the search view with the results compacted
-        return view('search', compact('artworks'));
+        return view('search', compact('artworks', 'categories'));
     }
 
     public function toggleActive($id)

@@ -6,15 +6,58 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>ARTWORKS</h2>
-                        <div class="input-group-lg col col-auto">
-                            <form action="{{route('search')}}" method="POST">
-                                @csrf
-                                <label for="search"></label><input type="text" class="form-control-sm" name="search" id="search"
-                                                                   placeholder="Search...">
-                                <button type="submit" class="btn btn-success mb-1">Go<i class="fa fa-search"></i></button>
-                            </form>
+                        <form action="{{ route('search') }}" method="POST">
+                            @csrf
+                            <label for="search"></label>
+                            <input
+                                type="text" class="form-control"
+                                name="search"
+                                id="search"
+                                placeholder="Search..."
+                                value="{{request('search')}}"
+                            >
                             <br>
-                        </div>
+                            <div class="mb-4 col-6">
+                                <div class="btn-group btn-group">
+                                    @if(request(['searchCategory']))
+                                        @php
+                                            $searchRequest = request(['searchCategory'][0]);
+                                        @endphp
+
+                                        @foreach($categories as $category)
+                                            @if(in_array($category->id, $searchRequest))
+
+                                                <input class="btn-check" name="searchCategory[]" type="checkbox"
+                                                       id="category-{{$category->id}}" value="{{$category->id}}" checked>
+
+                                                <label class="btn btn-outline-success"
+                                                       for="category-{{$category->id}}">{{$category->name}}</label>
+                                            @else
+                                                <input class="btn-check" name="searchCategory[]" type="checkbox"
+                                                       id="category-{{$category->id}}" value="{{$category->id}}">
+
+                                                <label class="btn btn-outline-success"
+                                                       for="category-{{$category->id}}">{{$category->name}}</label>
+                                            @endif
+                                        @endforeach
+
+                                    @else
+                                        @foreach($categories as $category)
+                                            <input class="btn-check" name="searchCategory[]" type="checkbox"
+                                                   id="category-{{$category->id}}" value="{{$category->id}}">
+
+                                            <label class="btn btn-outline-success"
+                                                   for="category-{{$category->id}}">{{$category->name}}</label>
+                                        @endforeach
+                                    @endif
+
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                     <div class="card-body">
                         <a href="{{ url('/artwork/create') }}" class="btn btn-success btn-sm" title="Add New Artwork">

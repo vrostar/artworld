@@ -12,4 +12,7 @@ class Artwork extends Model
     protected $fillable = ['name', 'artist', 'description', 'year', 'price'];
 
     use HasFactory;
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
 }
