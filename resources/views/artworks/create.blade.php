@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @if(auth()->user()->isVerified() || auth()->user()->isAdmin())
     <div class="card">
         <div class="card-header">Artworks Page</div>
         <div class="card-body">
@@ -71,4 +72,7 @@
             </form>
         </div>
     </div>
+    @else
+        <meta http-equiv="Refresh" content="0; url='/404'" />
+    @endif
 @stop
