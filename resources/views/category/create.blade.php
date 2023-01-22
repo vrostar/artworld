@@ -19,7 +19,7 @@
                                            name="name"
                                            type="text"
                                            value="{{old("name")}}"
-                                           placeholder="EG: Category 420"
+                                           placeholder="..."
                                            class="input-group input-group-text @error("name") is-invalid @enderror">
                                     @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -34,7 +34,7 @@
                                            name="description"
                                            type="text"
                                            value="{{old("description")}}"
-                                           placeholder="EG: It's catergorizing."
+                                           placeholder="..."
                                            class="input-group input-group-text @error("description") is-invalid @enderror">
                                     @error("description")
                                     <div class="alert alert-danger">{{ $message }}</div>

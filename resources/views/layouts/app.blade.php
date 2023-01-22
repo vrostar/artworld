@@ -35,6 +35,10 @@
                     </a>
                 </ul>
                 <ul class="navbar-nav me-auto">
+                    <a class="navbar-brand" href="{{ url('/categories') }}">Categories
+                    </a>
+                </ul>
+                <ul class="navbar-nav me-auto">
                     <a class="navbar-brand" href="{{ url('/users') }}">Users
                     </a>
                 </ul>
